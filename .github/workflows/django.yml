@@ -27,7 +27,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test
+        python3 manage.py test
     - name: Deploy
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
@@ -37,5 +37,5 @@ jobs:
         echo "TEST1"
         echo "$SECRET_KEY" > secret_key 
         chmod 600 secret_key 
-        ssh -oStrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} -i secret_key "cd ~/django_app && git pull origin master && python manage.py migrate && python manage.py runserver"
+        ssh -oStrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} -i secret_key "cd ~/django_app && git pull origin master && python3 manage.py migrate && python3 manage.py runserver"
       
