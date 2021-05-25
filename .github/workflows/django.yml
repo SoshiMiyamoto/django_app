@@ -41,6 +41,6 @@ jobs:
       run: | 
         echo "$SECRET_KEY" > secret_key
         chmod 600 secret_key
-        ssh -oStrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} -i secret_key ${DEPLOY_COMMAND}
+        ssh -oStrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} -i secret_key "${DEPLOY_COMMAND}"
         
       
