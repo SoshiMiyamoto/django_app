@@ -33,9 +33,14 @@ jobs:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         EC2_USER: ${{ secrets.EC2_USER }}
         EC2_HOST: ${{ secrets.EC2_HOST }}
+        DEPLOY_COMMAND: |
+          cd ~/django_app && \ 
+          git pull origin master && \
+          python3 manage.py migrate && \
+          python3 manage.py runserver && \
       run: | 
-        echo "$SECRET_KEY" > secret_key 
-        chmod 600 secret_key 
-        chmod 600 deploy.sh
-        ssh -oStrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} -i secret_key "./deploy.sh"
+        echo "$SECRET_KEY" > secret_key
+        chmod 600 secret_key
+        ssh -oStrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} -i secret_key ${DEPLOY_COMMAND}
+        
       
