@@ -34,8 +34,7 @@ jobs:
         EC2_USER: ${{ secrets.EC2_USER }}
         EC2_HOST: ${{ secrets.EC2_HOST }}
       run: | 
-        echo "TEST2"
         echo "$SECRET_KEY" > secret_key 
         chmod 600 secret_key 
-        ssh -oStrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} -i secret_key "cd ~/django_app && git pull origin master && python3 manage.py migrate && python3 manage.py runserver"
+        ssh -oStrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} -i secret_key "./deploy.sh"
       
