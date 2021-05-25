@@ -37,7 +37,7 @@ jobs:
           cd ~/django_app && \ 
           git pull origin master && \
           python3 manage.py migrate && \
-          python3 manage.py runserver && \
+          python3 manage.py runserver
       run: | 
         echo "$SECRET_KEY" > secret_key
         chmod 600 secret_key
