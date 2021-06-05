@@ -10,7 +10,7 @@ WORKDIR /src
 ADD . /src
 
 # pipでrequirements.txtに指定されているパッケージを追加する
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements-docker.txt
 
 # dbのmigration
 RUN python3 manage.py migrate
