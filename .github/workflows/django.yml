@@ -62,7 +62,7 @@ jobs:
         # Path where task-definition file is exist
         task-definition: aws/task-definition.json 
         container-name: django-app
-        image: $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        image: ${ECR_REGISTRY}/${ECR_REPOSITORY}:latest
 
     - name: Deploy to Amazon ECS service
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
