@@ -56,14 +56,13 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPO_NAME }} 
-        IMAGE_TAG: latest
       id: render-container
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         # Path where task-definition file is exist
         task-definition: aws/task-definition.json 
         container-name: django-app
-        image:  $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        image:  "${{ ECR_REGISTRY }}/${{ ECR_REPOSITORY}}:latest"
 
     - name: Deploy to Amazon ECS service
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
