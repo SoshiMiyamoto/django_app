@@ -65,9 +65,11 @@ jobs:
         image: ${ECR_REGISTRY}/${ECR_REPOSITORY}:latest
 
     - name: Deploy to Amazon ECS service
+      env:
+        TASK_DEFINITION: ${{ steps.render-container.outputs.task-definition }}
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        task-definition: ${{ steps.render-container.outputs.task-definition }}
+        task-definition: ${TASK_DEFINITION}
         service: django-service
         cluster: django-cluster
 
